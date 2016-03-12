@@ -31,22 +31,29 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.widgets.List;
+import org.eclipse.jface.viewers.ListViewer;
+import java.awt.Panel;
+import javax.swing.JRootPane;
 
 public class SearchPart {
 
 	private Text txtInput;
-	private TableViewer tableViewer;
 
 	@Inject
 	private MDirtyable dirty;
 
 	@PostConstruct
 	public void createComposite(Composite parent) {
-		//Frame frame = SWT_AWT.new_Frame(parent);
+	 Frame frame = SWT_AWT.getFrame(parent);
+	 
+	// Frame f= SWT_AWT.new_Frame(parent);
 	 parent.setLayout(new GridLayout(1, false));
 
 		txtInput = new Text(parent, SWT.BORDER);
-		txtInput.setMessage("Enter text to mark part as dirty");
+		txtInput.setMessage("Enter text to search a song");
 		txtInput.addModifyListener(new ModifyListener() {
 			@Override
 			public void modifyText(ModifyEvent e) {
@@ -54,26 +61,29 @@ public class SearchPart {
 			}
 		});
 		txtInput.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-
-		tableViewer = new TableViewer(parent);
-
-		tableViewer.add("Sample item 1");
-		tableViewer.add("Sample item 2");
-		tableViewer.add("Sample item 3");
-		tableViewer.add("Sample item 4");
-		tableViewer.add("Sample item 5");
-		tableViewer.getTable().setLayoutData(new GridData(GridData.FILL_BOTH)); 
-//		JPanel mainPanel = new JPanel();
-//		BorderLayout layout = new BorderLayout();
-//		mainPanel.setLayout(layout);
-//		JLabel label = new JLabel("Welcome");
-//		mainPanel.add(label);
-//		frame.add(mainPanel);
+		
+		Composite composite = new Composite(parent, SWT.EMBEDDED);
+		
+		Frame frame_1 = SWT_AWT.new_Frame(composite);
+		
+		Panel panel = new Panel();
+		frame_1.add(panel);
+		panel.setLayout(new BorderLayout(0, 0));
+		
+		JRootPane rootPane = new JRootPane();
+		panel.add(rootPane);
+		JPanel mainPanel = new JPanel();
+		BorderLayout layout = new BorderLayout();
+		mainPanel.setLayout(layout);
+		JLabel label = new JLabel("Welcome");
+		mainPanel.add(label);
+		frame_1.add(mainPanel);
+		//frame.repaint();
 	}
 
 	@Focus
 	public void setFocus() {
-		tableViewer.getTable().setFocus();
+		//tableViewer.getTable().setFocus();
 	}
 
 	@Persist
