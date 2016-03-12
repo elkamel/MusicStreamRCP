@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_TLAaIOgIEeW3qrk7d7G4cw" elementId="org.eclipse.e4.ide.application" bindingContexts="_TLAaKegIEeW3qrk7d7G4cw">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_TLAaIegIEeW3qrk7d7G4cw" label="MusicStream" width="500" height="400">
+    <children xsi:type="advanced:PerspectiveStack" xmi:id="_TLAaQOgIEeW3qrk7d7G4cw">
+      <children xsi:type="advanced:Perspective" xmi:id="_TLAaQegIEeW3qrk7d7G4cw">
+        <children xsi:type="basic:PartSashContainer" xmi:id="_TLAaQugIEeW3qrk7d7G4cw">
+          <children xsi:type="basic:PartStack" xmi:id="_TLAaQ-gIEeW3qrk7d7G4cw">
+            <children xsi:type="basic:Part" xmi:id="_y-bRkOiOEeWQPI6S2_eJsA" elementId="" contributionURI="bundleclass://MusicStream/musicstream.parts.TracksPart" label="Tracks" iconURI="platform:/plugin/MusicStream/icons/tracks.png"/>
+            <children xsi:type="basic:Part" xmi:id="_ILA8YOiVEeWQPI6S2_eJsA" elementId="musicstream.part.playlists" contributionURI="bundleclass://MusicStream/musicstream.parts.PlaylistsPart" label="Playlists" iconURI="platform:/plugin/MusicStream/icons/playlist.png"/>
+            <children xsi:type="basic:Part" xmi:id="_WuzV8OiVEeWQPI6S2_eJsA" elementId="musicstream.part.search" contributionURI="bundleclass://MusicStream/musicstream.parts.SearchPart" label="Search" iconURI="platform:/plugin/MusicStream/icons/search.png"/>
+          </children>
+        </children>
+      </children>
+    </children>
+    <mainMenu xmi:id="_TLAaOegIEeW3qrk7d7G4cw" elementId="menu:org.eclipse.ui.main.menu">
+      <children xsi:type="menu:Menu" xmi:id="_TLAaOugIEeW3qrk7d7G4cw" label="File">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_TLAaPegIEeW3qrk7d7G4cw" label="Quit" command="_TLAaLOgIEeW3qrk7d7G4cw"/>
+      </children>
+      <children xsi:type="menu:Menu" xmi:id="_TLAaPugIEeW3qrk7d7G4cw" label="Help">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_TLAaP-gIEeW3qrk7d7G4cw" label="About" command="_TLAaNugIEeW3qrk7d7G4cw"/>
+      </children>
+    </mainMenu>
+    <trimBars xmi:id="_TLAaRegIEeW3qrk7d7G4cw"/>
+  </children>
+  <handlers xmi:id="_TLAaLegIEeW3qrk7d7G4cw" elementId="MusicStream.handler.quitCommand" contributionURI="bundleclass://MusicStream/musicstream.handlers.QuitHandler" command="_TLAaLOgIEeW3qrk7d7G4cw"/>
+  <handlers xmi:id="_TLAaMegIEeW3qrk7d7G4cw" elementId="MusicStream.handler.openCommand" contributionURI="bundleclass://MusicStream/musicstream.handlers.OpenHandler" command="_TLAaMOgIEeW3qrk7d7G4cw"/>
+  <handlers xmi:id="_TLAaNOgIEeW3qrk7d7G4cw" elementId="MusicStream.handler.saveCommand" contributionURI="bundleclass://MusicStream/musicstream.handlers.SaveHandler" command="_TLAaM-gIEeW3qrk7d7G4cw"/>
+  <handlers xmi:id="_TLAaN-gIEeW3qrk7d7G4cw" elementId="MusicStream.handler.aboutCommand" contributionURI="bundleclass://MusicStream/musicstream.handlers.AboutHandler" command="_TLAaNugIEeW3qrk7d7G4cw"/>
+  <bindingTables xmi:id="_TLAaLugIEeW3qrk7d7G4cw" bindingContext="_TLAaKegIEeW3qrk7d7G4cw">
+    <bindings xmi:id="_TLAaL-gIEeW3qrk7d7G4cw" keySequence="M1+Q" command="_TLAaLOgIEeW3qrk7d7G4cw"/>
+    <bindings xmi:id="_TLAaMugIEeW3qrk7d7G4cw" keySequence="M1+O" command="_TLAaMOgIEeW3qrk7d7G4cw"/>
+    <bindings xmi:id="_TLAaNegIEeW3qrk7d7G4cw" keySequence="M1+S" command="_TLAaM-gIEeW3qrk7d7G4cw"/>
+    <bindings xmi:id="_TLAaOOgIEeW3qrk7d7G4cw" keySequence="M1+A" command="_TLAaNugIEeW3qrk7d7G4cw"/>
+  </bindingTables>
+  <rootContext xmi:id="_TLAaKegIEeW3qrk7d7G4cw" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
+    <children xmi:id="_TLAaKugIEeW3qrk7d7G4cw" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
+    <children xmi:id="_TLAaK-gIEeW3qrk7d7G4cw" elementId="org.eclipse.ui.contexts.dialog" name="In Dialogs"/>
+  </rootContext>
+  <commands xmi:id="_TLAaLOgIEeW3qrk7d7G4cw" elementId="org.eclipse.ui.file.exit" commandName="quitCommand"/>
+  <commands xmi:id="_TLAaMOgIEeW3qrk7d7G4cw" elementId="MusicStream.open" commandName="openCommand"/>
+  <commands xmi:id="_TLAaM-gIEeW3qrk7d7G4cw" elementId="org.eclipse.ui.file.save" commandName="saveCommand"/>
+  <commands xmi:id="_TLAaNugIEeW3qrk7d7G4cw" elementId="org.eclipse.ui.help.aboutAction" commandName="aboutCommand"/>
+  <addons xmi:id="_TLAaIugIEeW3qrk7d7G4cw" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
+  <addons xmi:id="_TLAaI-gIEeW3qrk7d7G4cw" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
+  <addons xmi:id="_TLAaJOgIEeW3qrk7d7G4cw" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
+  <addons xmi:id="_TLAaJegIEeW3qrk7d7G4cw" elementId="org.eclipse.e4.ui.workbench.commands.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.CommandProcessingAddon"/>
+  <addons xmi:id="_TLAaJugIEeW3qrk7d7G4cw" elementId="org.eclipse.e4.ui.workbench.handler.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>
+  <addons xmi:id="_TLAaJ-gIEeW3qrk7d7G4cw" elementId="org.eclipse.e4.ui.workbench.contexts.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.ContextProcessingAddon"/>
+  <addons xmi:id="_TLAaKOgIEeW3qrk7d7G4cw" elementId="org.eclipse.e4.ui.workbench.bindings.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.swt/org.eclipse.e4.ui.workbench.swt.util.BindingProcessingAddon"/>
+</application:Application>

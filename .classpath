@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="libs/com.google.protobuf-2.4.0.jar"/>
+	<classpathentry kind="lib" path="libs/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="libs/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="libs/commons-validator-1.5.0.jar"/>
+	<classpathentry kind="lib" path="libs/Deezer.jar"/>
+	<classpathentry kind="lib" path="libs/gson-2.2.2.jar"/>
+	<classpathentry kind="lib" path="libs/guava-18.0.jar"/>
+	<classpathentry kind="lib" path="libs/httpclient-4.5.1.jar"/>
+	<classpathentry kind="lib" path="libs/httpclient-cache-4.5.1.jar"/>
+	<classpathentry kind="lib" path="libs/httpclient-win-4.5.1.jar"/>
+	<classpathentry kind="lib" path="libs/httpcore-4.4.3.jar"/>
+	<classpathentry kind="lib" path="libs/jackson-all-1.6.1.jar"/>
+	<classpathentry kind="lib" path="libs/jl1.0.jar"/>
+	<classpathentry kind="lib" path="libs/json-lib.jar"/>
+	<classpathentry kind="lib" path="libs/mp3plugin.jar"/>
+	<classpathentry kind="lib" path="libs/mp3spi.jar"/>
+	<classpathentry kind="lib" path="libs/org-apache-commons-codec.jar"/>
+	<classpathentry kind="lib" path="libs/org.apache.commons.httpclient.jar"/>
+	<classpathentry kind="lib" path="libs/protobuf-java-2.4.1.jar"/>
+	<classpathentry kind="lib" path="libs/soundcloud-0.2.1-jar-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="libs/tritonus_share.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
