@@ -60,8 +60,8 @@ public class SoundCloudApi implements Api {
 	 */
 	@Override
 	public ArrayList<Track> getTracksByUser() {
-		String[] c = appU.getUserCredentials();
-		this.userAuthentication(c[0], c[1]);
+		//String[] c = appU.getUserCredentials();
+		this.userAuthentication("", "");
 
 		User me = soundcloud.getMe();
 
