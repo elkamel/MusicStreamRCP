@@ -97,8 +97,8 @@ public class SoundCloudApi implements Api {
 	@Override
 	public ArrayList<Playlist> getPlaylistByUser() {
 
-		String[] c = appU.getUserCredentials();
-		this.userAuthentication(c[0], c[1]);
+		//String[] c = appU.getUserCredentials();
+		this.userAuthentication("", "");
 		User me = soundcloud.getMe();
 		Integer count = me.getPlaylistCount();
 
