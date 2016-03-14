@@ -29,7 +29,6 @@ import org.eclipse.e4.ui.di.Persist;
 import org.eclipse.e4.ui.model.application.ui.MDirtyable;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.awt.SWT_AWT;
-import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.List;
 
@@ -53,7 +52,7 @@ public class TracksPart implements ListSelectionListener {
 	private String[] nameList;
 	private String[] streamU;
 	private int[] tracksLength;
-	private Object[] tracks;
+	private String[] tracksSource;
 	@Inject
 	private MDirtyable dirty;
 
@@ -67,6 +66,7 @@ public class TracksPart implements ListSelectionListener {
 		mainPanel.setLayout(layout);
 
 		appU = new AppUtils();
+		tracksSource = new String[100];
 		soundCApi = new SoundCloudApi();
 		deezerApi = new DeezerApi();
 		player = new MusicPlayer();
@@ -74,7 +74,7 @@ public class TracksPart implements ListSelectionListener {
 		imageMap = createImageMap(nameList);
 		streamU = this.getTracksStream();
 		tracksLength = this.getTrackLength();
-		tracks = this.getTracks();
+		// tracks = this.getTracks();
 		// / Setting up the Screen
 		listSwing = new JList(nameList);
 		listSwing.setCellRenderer(new tracksListRenderer());
@@ -179,9 +179,11 @@ public class TracksPart implements ListSelectionListener {
 		String[] nameList = new String[tracks.size() + tracksDeezer.size()];
 		for (int i = 0; i < tracks.size(); i++) {
 			nameList[i] = tracks.get(i).getTitle();
+			tracksSource[i] = "Soundcloud";
 		}
 		for (int i = 0; i < tracksDeezer.size(); i++) {
 			nameList[i + tracks.size()] = tracksDeezer.get(i).getTitle();
+			tracksSource[i + tracks.size()] = "Deezer";
 		}
 		return nameList;
 	}
@@ -209,19 +211,6 @@ public class TracksPart implements ListSelectionListener {
 		return (int[]) ArrayUtils.addAll(sc, deez);
 	}
 
-	private Object[] getTracks() {
-		ArrayList<Track> track = soundCApi.getTracksByUser();
-		ArrayList<com.zeloon.deezer.domain.Track> trackDeezer = deezerApi.getTracksByUser();
-		Object[] tracks = new Object[track.size() + trackDeezer.size()];
-		for (int i = 0; i < track.size(); i++) {
-			tracks[i] = track.get(i);
-		}
-		for (int i = 0; i < trackDeezer.size(); i++) {
-			tracks[i + track.size()] = trackDeezer.get(i);
-		}
-		return tracks;
-	}
-
 	@Override
 	public void valueChanged(ListSelectionEvent arg0) {
 		try {
@@ -235,9 +224,9 @@ public class TracksPart implements ListSelectionListener {
 			@Override
 			public void run() {
 				int index = listSwing.getSelectedIndex();
-				Object obj = tracks[index];
+				String source = tracksSource[index];
 				player.setVisible(true);
-				player.getTrackToPlayLength(tracksLength[index], obj);
+				player.getTrackToPlayLength(tracksLength[index], source);
 				player.getTrackToPlay(streamU[index]);
 			}
 		});

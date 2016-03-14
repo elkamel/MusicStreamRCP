@@ -14,6 +14,7 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import javax.swing.BoxLayout;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -35,13 +36,6 @@ import org.eclipse.e4.ui.di.Persist;
 import org.eclipse.e4.ui.model.application.ui.MDirtyable;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.awt.SWT_AWT;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
@@ -51,8 +45,6 @@ import com.musicstream.player.MusicPlayer;
 import com.musicstream.utils.AppUtils;
 
 import de.voidplus.soundcloud.Track;
-import java.awt.FlowLayout;
-import javax.swing.BoxLayout;
 
 public class SearchPart implements ListSelectionListener, ActionListener {
 	public static JTextField textField;
@@ -68,7 +60,6 @@ public class SearchPart implements ListSelectionListener, ActionListener {
 	private int[] tracksLength;
 	private MusicPlayer player;
 	private String title;
-	private Object[] tracks;
 	private Text txtInput;
 	private JButton search;
 	private String[] tracksSource;
@@ -246,24 +237,6 @@ public class SearchPart implements ListSelectionListener, ActionListener {
 		return nameList;
 	}
 
-	private Object[] getTracks() {
-		try {
-			ArrayList<Track> track = soundCApi.getTrack(title);
-			ArrayList<com.zeloon.deezer.domain.Track> trackDeezer = deezerApi.getTrack(title);
-			Object[] tracks = new Object[track.size() + trackDeezer.size()];
-			for (int i = 0; i < track.size(); i++) {
-				tracks[i] = track.get(i);
-			}
-			for (int i = 0; i < trackDeezer.size(); i++) {
-				tracks[i + track.size()] = trackDeezer.get(i);
-			}
-			
-		} catch (Exception e) {
-		System.out.println("Timeout");
-		}
-		return tracks;
-	}
-
 	/**
 	 * @return Array contains the stream URL of each Track from the two Services
 	 */
@@ -301,7 +274,6 @@ public class SearchPart implements ListSelectionListener, ActionListener {
 			scroll.setVisible(true);
 			tracksLength = this.getTrackLength();
 			streamU = this.getTracksStream();
-			tracks = this.getTracks();
 		} else {
 			JOptionPane.showMessageDialog(null, "Please Type a song to search", "MusicStream - Invalid Input",
 					JOptionPane.ERROR_MESSAGE);

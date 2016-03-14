@@ -14,14 +14,12 @@ import javax.sound.sampled.LineListener;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-import com.zeloon.deezer.domain.Track;
-
 /**
  * An utility class for playing back audio files using Java Sound API.
  * 
  */
 public class AudioPlayer implements LineListener {
-	
+
 	/**
 	 * this flag indicates whether the playback completes or not.
 	 */
@@ -45,13 +43,10 @@ public class AudioPlayer implements LineListener {
 	 * @throws UnsupportedAudioFileException
 	 * @throws LineUnavailableException
 	 */
-	public void load(String audioFilePath)
-			throws UnsupportedAudioFileException, IOException,
-			LineUnavailableException {
+	public void load(String audioFilePath) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		File audioFile = new File(audioFilePath);
 
-		AudioInputStream audioStream = AudioSystem
-				.getAudioInputStream(audioFile);
+		AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
 
 		AudioFormat format = audioStream.getFormat();
 
@@ -69,12 +64,12 @@ public class AudioPlayer implements LineListener {
 		return s;
 	}
 
-	public String getClipLengthString(int seconds, Object object) {
+	public String getClipLengthString(int seconds, String source) {
 		String length = "";
 		int hour = 0;
 		int minute = 0;
 
-		if (object instanceof de.voidplus.soundcloud.Track) {
+		if (source.equals("Soundcloud")) {
 			seconds = (int) TimeUnit.MILLISECONDS.toSeconds(seconds);
 			minute = (int) TimeUnit.MILLISECONDS.toMinutes(seconds);
 			hour = (int) TimeUnit.MILLISECONDS.toHours(seconds);
@@ -99,8 +94,6 @@ public class AudioPlayer implements LineListener {
 		int second = seconds - hour * 3600 - minute * 60;
 
 		length += String.format("%02d", second);
-
-		System.out.println(hour + " " + minute + " " + second);
 
 		return length;
 	}

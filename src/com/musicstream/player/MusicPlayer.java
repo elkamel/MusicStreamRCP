@@ -8,8 +8,6 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -28,8 +26,8 @@ public class MusicPlayer extends JPanel implements ActionListener {
 	public AppUtils appU;
 	public String url;
 	public int length;
-	public Object object;
-	//private static Thread t;
+	public String source;
+	// private static Thread t;
 	private boolean isPlaying = false;
 	private boolean isPause = false;
 
@@ -51,15 +49,15 @@ public class MusicPlayer extends JPanel implements ActionListener {
 	 * private ImageIcon iconOpen = new ImageIcon(getClass().getResource(
 	 * "images/Open.png"));
 	 */
-	private ImageIcon iconPlay = new ImageIcon("images/Play.gif");
-	private ImageIcon iconStop = new ImageIcon("images/Stop.gif");
-	private ImageIcon iconPause = new ImageIcon("images/Pause.png");
+	private ImageIcon iconPlay = new ImageIcon("icons/Play.gif");
+	private ImageIcon iconStop = new ImageIcon("icons/Stop.gif");
+	private ImageIcon iconPause = new ImageIcon("icons/Pause.png");
 
 	public MusicPlayer() {
 		appU = new AppUtils();
 		player = new AudioPlayer();
-		setLayout( new FlowLayout());
-		 
+		setLayout(new FlowLayout());
+
 		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.insets = new Insets(5, 5, 5, 5);
 		constraints.anchor = GridBagConstraints.WEST;
@@ -72,12 +70,12 @@ public class MusicPlayer extends JPanel implements ActionListener {
 		buttonPlay.setFont(new Font("Sans", Font.BOLD, 14));
 		buttonPlay.setIcon(iconPlay);
 		buttonPlay.setEnabled(true);
-		buttonPlay.setPreferredSize(new Dimension(120,30));
-		
+		buttonPlay.setPreferredSize(new Dimension(120, 30));
+
 		buttonPause.setFont(new Font("Sans", Font.BOLD, 14));
 		buttonPause.setIcon(iconPause);
 		buttonPause.setEnabled(false);
-		buttonPause.setPreferredSize(new Dimension(120,30));
+		buttonPause.setPreferredSize(new Dimension(120, 30));
 
 		labelTimeCounter.setFont(new Font("Sans", Font.BOLD, 12));
 		labelDuration.setFont(new Font("Sans", Font.BOLD, 12));
@@ -107,7 +105,6 @@ public class MusicPlayer extends JPanel implements ActionListener {
 
 		constraints.gridx = 6;
 		add(labelDuration, constraints);
-	
 
 		// JPanel panelButtons = new JPanel(new FlowLayout(FlowLayout.CENTER,
 		// 20, 5));
@@ -128,16 +125,15 @@ public class MusicPlayer extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
-//		Runnable 
-//		Thread timer = new Thread();
-		
+		// Runnable
+		// Thread timer = new Thread();
+
 		if (source instanceof JButton) {
 			JButton button = (JButton) source;
 			if (button == buttonPlay) {
 				if (!isPlaying) {
 					playBack(url, length);
-					
-					
+
 				} else {
 					stopPlaying();
 				}
@@ -172,31 +168,23 @@ public class MusicPlayer extends JPanel implements ActionListener {
 					buttonPause.setText("Pause");
 					buttonPause.setEnabled(true);
 
-					labelDuration.setText(player.getClipLengthString(length,
-							object));
+					labelDuration.setText(player.getClipLengthString(length, source));
 					// sliderTime.setMaximum(length);
 					appU.readAudioFeed(url);
-					// player.load(audioFilePath);
 					// timer.setAudioClip(player.getAudioClip());
-					// labelFileName.setText("Playing File: " + audioFilePath);
-					// player.getClipSecondLength(length);
 					player.play();
-					System.out.print(player.getClipLengthString(length,
-							object));
-						Thread t = new Thread(new Runnable() {
-							public void run() {
-								sliderTime.setValue(sliderTime.getValue()+1);
-							}
-				 
+					Thread t = new Thread(new Runnable() {
+						public void run() {
+							sliderTime.setValue(sliderTime.getValue() + 1);
+						}
 
 					});
-					 
+
 					t.start();
 					resetControls();
 
 				} catch (IOException ex) {
-					JOptionPane.showMessageDialog(MusicPlayer.this,
-							"I/O error while playing the audio file!", "Error",
+					JOptionPane.showMessageDialog(MusicPlayer.this, "I/O error while playing the audio file!", "Error",
 							JOptionPane.ERROR_MESSAGE);
 					resetControls();
 					ex.printStackTrace();
@@ -216,7 +204,7 @@ public class MusicPlayer extends JPanel implements ActionListener {
 		// timer.reset();
 		// timer.interrupt();
 		player.stop();
-		//t.stop();
+		// t.stop();
 		sliderTime.setValue(0);
 		playbackThread.stop();
 		resetControls();
@@ -228,7 +216,7 @@ public class MusicPlayer extends JPanel implements ActionListener {
 		buttonPause.setIcon(iconPlay);
 		isPause = true;
 		player.pause();
-	//	t.suspend();
+		// t.suspend();
 		// timer.pauseTimer();
 		playbackThread.suspend();
 	}
@@ -239,7 +227,7 @@ public class MusicPlayer extends JPanel implements ActionListener {
 		buttonPause.setIcon(iconPause);
 		isPause = false;
 		player.resume();
-	//	t.resume();
+		// t.resume();
 		// timer.resumeTimer();
 		playbackThread.resume();
 	}
@@ -252,7 +240,7 @@ public class MusicPlayer extends JPanel implements ActionListener {
 		buttonPlay.setIcon(iconPlay);
 		buttonPause.setEnabled(false);
 		isPlaying = false;
-		 
+
 	}
 
 	public void getTrackToPlay(String url) {
@@ -260,9 +248,9 @@ public class MusicPlayer extends JPanel implements ActionListener {
 
 	}
 
-	public void getTrackToPlayLength(int length, Object object) {
+	public void getTrackToPlayLength(int length, String source) {
 		this.length = length;
-		this.object = object;
+		this.source = source;
 	}
 
 }
