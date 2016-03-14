@@ -187,7 +187,7 @@ public class PlaylistsPart implements ListSelectionListener {
 //					e1.printStackTrace();
 //				}
 //			}
-//		});
+//		}); 
 
 	}
 }

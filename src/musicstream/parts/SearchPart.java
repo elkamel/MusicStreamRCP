@@ -1,4 +1,3 @@
-
 package musicstream.parts;
 
 import java.awt.BorderLayout;
@@ -72,7 +71,7 @@ public class SearchPart implements ListSelectionListener, ActionListener {
 	private Object[] tracks;
 	private Text txtInput;
 	private JButton search;
-	 
+	private String[] tracksSource;
 
 	@Inject
 	private MDirtyable dirty;
@@ -87,7 +86,7 @@ public class SearchPart implements ListSelectionListener, ActionListener {
 		BorderLayout layout = new BorderLayout();
 		mainPanel.setLayout(layout);
 		JPanel headPanel = new JPanel();
-
+		tracksSource = new String[100];
 		textField = new JTextField();
 		textField.setToolTipText("Please Enter The Text of Your Search");
 		search = new JButton("Search");
@@ -139,8 +138,8 @@ public class SearchPart implements ListSelectionListener, ActionListener {
 			@Override
 			public void run() {
 				player.setVisible(true);
-				Object obj = tracks[list.getSelectedIndex()];
-				player.getTrackToPlayLength(tracksLength[list.getSelectedIndex()], obj);
+				String source = tracksSource[list.getSelectedIndex()];
+				player.getTrackToPlayLength(tracksLength[list.getSelectedIndex()], source);
 				player.getTrackToPlay(streamU[list.getSelectedIndex()]);
 			}
 		});
@@ -238,22 +237,29 @@ public class SearchPart implements ListSelectionListener, ActionListener {
 		String[] nameList = new String[tracks.size() + tracksDeezer.size()];
 		for (int i = 0; i < tracks.size(); i++) {
 			nameList[i] = tracks.get(i).getTitle();
+			tracksSource[i] = "Soundcloud";
 		}
 		for (int i = 0; i < tracksDeezer.size(); i++) {
 			nameList[i + tracks.size()] = tracksDeezer.get(i).getTitle();
+			tracksSource[i + tracks.size()] = "Deezer";
 		}
 		return nameList;
 	}
 
 	private Object[] getTracks() {
-		ArrayList<Track> track = soundCApi.getTrack(title);
-		ArrayList<com.zeloon.deezer.domain.Track> trackDeezer = deezerApi.getTrack(title);
-		Object[] tracks = new Object[track.size() + trackDeezer.size()];
-		for (int i = 0; i < track.size(); i++) {
-			tracks[i] = track.get(i);
-		}
-		for (int i = 0; i < trackDeezer.size(); i++) {
-			tracks[i + track.size()] = trackDeezer.get(i);
+		try {
+			ArrayList<Track> track = soundCApi.getTrack(title);
+			ArrayList<com.zeloon.deezer.domain.Track> trackDeezer = deezerApi.getTrack(title);
+			Object[] tracks = new Object[track.size() + trackDeezer.size()];
+			for (int i = 0; i < track.size(); i++) {
+				tracks[i] = track.get(i);
+			}
+			for (int i = 0; i < trackDeezer.size(); i++) {
+				tracks[i + track.size()] = trackDeezer.get(i);
+			}
+			
+		} catch (Exception e) {
+		System.out.println("Timeout");
 		}
 		return tracks;
 	}
