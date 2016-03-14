@@ -31,7 +31,7 @@ import com.musicstream.api.SoundCloudApi;
 import com.musicstream.utils.AppUtils;
 
 import de.voidplus.soundcloud.Playlist;
-import de.voidplus.soundcloud.User; 
+import de.voidplus.soundcloud.User;
 
 public class PlaylistsPart implements ListSelectionListener {
 	private Map<String, ImageIcon> imageMap;
@@ -175,19 +175,21 @@ public class PlaylistsPart implements ListSelectionListener {
 
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
-		final Object playlist = playLists[list.getSelectedIndex()];
-		 
-//		Display.getDefault().syncExec(new Runnable() {
-//			public void run() {
-//				try {
-//					DetailedPlaylistWindow window = new DetailedPlaylistWindow(playlist);
-//					window.setBlockOnOpen(true);
-//					window.open();
-//				} catch (Exception e1) {
-//					e1.printStackTrace();
-//				}
-//			}
-//		}); 
+		if (!e.getValueIsAdjusting()) {
+			final Object playlist = playLists[list.getSelectedIndex()];
 
+			Display.getDefault().asyncExec(new Runnable() {
+				public void run() {
+					try {
+						DetailedPlaylistWindow window = new DetailedPlaylistWindow(playlist);
+						window.setBlockOnOpen(true);
+						window.open();
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+				}
+			});
+
+		}
 	}
 }

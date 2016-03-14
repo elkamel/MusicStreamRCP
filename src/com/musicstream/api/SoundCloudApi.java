@@ -141,7 +141,16 @@ public class SoundCloudApi implements Api {
 		}
 		return urls;
 	}
-
+	 
+	public String[] getStreamUrlPlaylist(Object playlist) {
+		
+		ArrayList<Track> tracks = getTracksofPlaylist(playlist);
+		String[] urls = new String[tracks.size()];
+		for (int i = 0; i < tracks.size(); i++) {
+			urls[i] = tracks.get(i).getStreamUrl();
+		}
+		return urls;
+	}
 	@Override
 	public String[] getStreamUrlSearch(String title) {
 		ArrayList<Track> tracks = this.getTrack(title);

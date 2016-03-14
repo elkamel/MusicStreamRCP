@@ -61,7 +61,15 @@ public class DeezerApi implements Api {
 		PlaylistId pID = new PlaylistId(pl.getId());
 		return (ArrayList<Track>) deezerClient.getTracks(pID).getData();
 	}
-
+	public String[] getStreamUrlPlaylist(Object playlist) {
+		
+		ArrayList<Track> tracks = getTracksofPlaylist(playlist);
+		String[] urls = new String[tracks.size()];
+		for (int i = 0; i < tracks.size(); i++) {
+			urls[i] = tracks.get(i).getPreview();
+		}
+		return urls;
+	}
 	public String getPreviewTrack(TrackId tID) {
 		return deezerClient.get(tID).getPreview();
 	}
