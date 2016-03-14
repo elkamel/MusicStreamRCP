@@ -72,6 +72,7 @@ public class SearchPart implements ListSelectionListener, ActionListener {
 	private Object[] tracks;
 	private Text txtInput;
 	private JButton search;
+	 
 
 	@Inject
 	private MDirtyable dirty;
@@ -292,9 +293,9 @@ public class SearchPart implements ListSelectionListener, ActionListener {
 			list.setListData(nameList);
 			list.setCellRenderer(new SearchTrack());
 			scroll.setVisible(true);
-			tracksLength = getTrackLength();
-			streamU = getTracksStream();
-			tracks = getTracks();
+			tracksLength = this.getTrackLength();
+			streamU = this.getTracksStream();
+			tracks = this.getTracks();
 		} else {
 			JOptionPane.showMessageDialog(null, "Please Type a song to search", "MusicStream - Invalid Input",
 					JOptionPane.ERROR_MESSAGE);

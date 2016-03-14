@@ -8,6 +8,8 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -27,7 +29,7 @@ public class MusicPlayer extends JPanel implements ActionListener {
 	public String url;
 	public int length;
 	public Object object;
-
+	//private static Thread t;
 	private boolean isPlaying = false;
 	private boolean isPause = false;
 
@@ -105,6 +107,7 @@ public class MusicPlayer extends JPanel implements ActionListener {
 
 		constraints.gridx = 6;
 		add(labelDuration, constraints);
+	
 
 		// JPanel panelButtons = new JPanel(new FlowLayout(FlowLayout.CENTER,
 		// 20, 5));
@@ -134,7 +137,7 @@ public class MusicPlayer extends JPanel implements ActionListener {
 				if (!isPlaying) {
 					playBack(url, length);
 					
-					sliderTime.setValue(sliderTime.getValue()+1);
+					
 				} else {
 					stopPlaying();
 				}
@@ -178,7 +181,17 @@ public class MusicPlayer extends JPanel implements ActionListener {
 					// labelFileName.setText("Playing File: " + audioFilePath);
 					// player.getClipSecondLength(length);
 					player.play();
+					System.out.print(player.getClipLengthString(length,
+							object));
+						Thread t = new Thread(new Runnable() {
+							public void run() {
+								sliderTime.setValue(sliderTime.getValue()+1);
+							}
+				 
 
+					});
+					 
+					t.start();
 					resetControls();
 
 				} catch (IOException ex) {
@@ -203,6 +216,8 @@ public class MusicPlayer extends JPanel implements ActionListener {
 		// timer.reset();
 		// timer.interrupt();
 		player.stop();
+		//t.stop();
+		sliderTime.setValue(0);
 		playbackThread.stop();
 		resetControls();
 	}
@@ -213,6 +228,7 @@ public class MusicPlayer extends JPanel implements ActionListener {
 		buttonPause.setIcon(iconPlay);
 		isPause = true;
 		player.pause();
+	//	t.suspend();
 		// timer.pauseTimer();
 		playbackThread.suspend();
 	}
@@ -223,6 +239,7 @@ public class MusicPlayer extends JPanel implements ActionListener {
 		buttonPause.setIcon(iconPause);
 		isPause = false;
 		player.resume();
+	//	t.resume();
 		// timer.resumeTimer();
 		playbackThread.resume();
 	}
@@ -235,6 +252,7 @@ public class MusicPlayer extends JPanel implements ActionListener {
 		buttonPlay.setIcon(iconPlay);
 		buttonPause.setEnabled(false);
 		isPlaying = false;
+		 
 	}
 
 	public void getTrackToPlay(String url) {

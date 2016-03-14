@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -22,16 +24,13 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import org.apache.commons.lang.ArrayUtils;
+import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.e4.ui.di.Persist;
+import org.eclipse.e4.ui.model.application.ui.MDirtyable;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.awt.SWT_AWT;
-import org.eclipse.swt.custom.CTabFolder;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
 
 import com.musicstream.api.DeezerApi;
@@ -42,24 +41,6 @@ import com.zeloon.deezer.domain.internal.TrackId;
 
 import de.voidplus.soundcloud.Track;
 import de.voidplus.soundcloud.User;
-
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import org.eclipse.e4.ui.di.Focus;
-import org.eclipse.e4.ui.di.Persist;
-import org.eclipse.e4.ui.model.application.ui.MDirtyable;
-import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.awt.SWT_AWT;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.widgets.Label;
-import java.awt.Panel;
-import javax.swing.JRootPane;
 
 public class TracksPart implements ListSelectionListener {
 	private Map<String, ImageIcon> imageMap;
@@ -84,7 +65,7 @@ public class TracksPart implements ListSelectionListener {
 		JPanel mainPanel = new JPanel();
 		BorderLayout layout = new BorderLayout();
 		mainPanel.setLayout(layout);
-		
+
 		appU = new AppUtils();
 		soundCApi = new SoundCloudApi();
 		deezerApi = new DeezerApi();
@@ -99,21 +80,19 @@ public class TracksPart implements ListSelectionListener {
 		listSwing.setCellRenderer(new tracksListRenderer());
 		listSwing.addListSelectionListener(this);
 		JScrollPane scroll = new JScrollPane(listSwing);
-		scroll.setPreferredSize(new Dimension(appU.getScreenWidth() - 60, appU
-				.getScreenHeight() - 100));
-		scroll.setBounds(10, 50, appU.getScreenWidth() - 40,
-				appU.getScreenHeight() - 300);
-
+		scroll.setPreferredSize(new Dimension(appU.getScreenWidth() - 60, appU.getScreenHeight() - 100));
+		scroll.setBounds(10, 50, appU.getScreenWidth() - 40, appU.getScreenHeight() - 300);
+		java.awt.Font fontLabel = new java.awt.Font("helvitica", java.awt.Font.BOLD, 18);
 		JLabel label = new JLabel("Welcome : " + getUserName());
 		label.setBounds(10, -15, 250, 75);
-		player.setBounds(10, appU.getScreenHeight() - 150,
-				appU.getScreenWidth() - 40, 80);
+		label.setFont(fontLabel);
+		player.setBounds(10, appU.getScreenHeight() - 150, appU.getScreenWidth() - 40, 80);
 		player.setVisible(false);
 		mainPanel.add(label, BorderLayout.NORTH);
 		mainPanel.add(scroll, BorderLayout.CENTER);
 		mainPanel.add(player, BorderLayout.SOUTH);
 		frame_1.add(mainPanel);
-	
+
 	}
 
 	@Focus
@@ -125,16 +104,16 @@ public class TracksPart implements ListSelectionListener {
 	public void save() {
 		dirty.setDirty(false);
 	}
+
 	private class tracksListRenderer extends DefaultListCellRenderer {
 
 		// Font font = new Font("helvitica", Font.BOLD, 24);
 
 		@Override
-		public Component getListCellRendererComponent(JList list, Object value,
-				int index, boolean isSelected, boolean cellHasFocus) {
+		public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
+				boolean cellHasFocus) {
 
-			JLabel label = (JLabel) super.getListCellRendererComponent(list,
-					value, index, isSelected, cellHasFocus);
+			JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 			label.setIcon(imageMap.get(value));
 			label.setHorizontalTextPosition(SwingConstants.RIGHT);
 			// label.setFont(font);
@@ -185,8 +164,7 @@ public class TracksPart implements ListSelectionListener {
 	}
 
 	private ArrayList<com.zeloon.deezer.domain.Track> getUserTracksDeezer() {
-		ArrayList<com.zeloon.deezer.domain.Track> tracks = deezerApi
-				.getTracksByUser();
+		ArrayList<com.zeloon.deezer.domain.Track> tracks = deezerApi.getTracksByUser();
 		return tracks;
 	}
 
@@ -215,6 +193,7 @@ public class TracksPart implements ListSelectionListener {
 		User UserData = soundCApi.getUser();
 		return UserData.getUsername();
 	}
+
 	/**
 	 * @return Array contains the stream URL of each Track from the two Services
 	 */
@@ -232,8 +211,7 @@ public class TracksPart implements ListSelectionListener {
 
 	private Object[] getTracks() {
 		ArrayList<Track> track = soundCApi.getTracksByUser();
-		ArrayList<com.zeloon.deezer.domain.Track> trackDeezer = deezerApi
-				.getTracksByUser();
+		ArrayList<com.zeloon.deezer.domain.Track> trackDeezer = deezerApi.getTracksByUser();
 		Object[] tracks = new Object[track.size() + trackDeezer.size()];
 		for (int i = 0; i < track.size(); i++) {
 			tracks[i] = track.get(i);
@@ -243,6 +221,7 @@ public class TracksPart implements ListSelectionListener {
 		}
 		return tracks;
 	}
+
 	@Override
 	public void valueChanged(ListSelectionEvent arg0) {
 		try {

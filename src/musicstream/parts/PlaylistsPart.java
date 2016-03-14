@@ -20,33 +20,38 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.awt.SWT_AWT;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 
 import com.musicstream.api.DeezerApi;
 import com.musicstream.api.SoundCloudApi;
 import com.musicstream.utils.AppUtils;
 
 import de.voidplus.soundcloud.Playlist;
-import de.voidplus.soundcloud.User;
+import de.voidplus.soundcloud.User; 
 
 public class PlaylistsPart implements ListSelectionListener {
-	private  Map<String, ImageIcon> imageMap;
+	private Map<String, ImageIcon> imageMap;
 	public AppUtils appU;
 	SoundCloudApi soundCApi;
 	DeezerApi deezerApi;
 	Font fontLabel;
 	private JList list;
 	Object[] playLists;
+	private Composite parent_C;
+
 	@PostConstruct
 	public void createComposite(Composite parent) {
 		Composite composite = new Composite(parent, SWT.EMBEDDED);
+		parent_C = parent;
 		Frame frame_1 = SWT_AWT.new_Frame(composite);
 		JPanel mainPanel = new JPanel();
 		BorderLayout layout = new BorderLayout();
 		mainPanel.setLayout(layout);
-		
+
 		appU = new AppUtils();
 		soundCApi = new SoundCloudApi();
 		deezerApi = new DeezerApi();
@@ -64,7 +69,8 @@ public class PlaylistsPart implements ListSelectionListener {
 		mainPanel.add(label, BorderLayout.NORTH);
 		mainPanel.add(scroll, BorderLayout.CENTER);
 		frame_1.add(mainPanel);
-	 }
+	}
+
 	/**
 	 * @author Malek JList Renderer
 	 */
@@ -169,7 +175,19 @@ public class PlaylistsPart implements ListSelectionListener {
 
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
-		Object playlist = playLists[list.getSelectedIndex()];
-		// PlaylistTracksPan playlistTracks = new PlaylistTracksPan(playlist);
+		final Object playlist = playLists[list.getSelectedIndex()];
+		 
+//		Display.getDefault().syncExec(new Runnable() {
+//			public void run() {
+//				try {
+//					DetailedPlaylistWindow window = new DetailedPlaylistWindow(playlist);
+//					window.setBlockOnOpen(true);
+//					window.open();
+//				} catch (Exception e1) {
+//					e1.printStackTrace();
+//				}
+//			}
+//		});
+
 	}
 }
