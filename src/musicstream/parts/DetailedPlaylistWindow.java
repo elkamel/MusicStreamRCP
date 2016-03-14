@@ -48,7 +48,6 @@ public class DetailedPlaylistWindow extends ApplicationWindow implements ListSel
 	private SoundCloudApi soundCApi;
 	private DeezerApi deezerApi;
 	private MusicPlayer player;
-	private Font fontLabel;
 	private JList list;
 	private String[] nameList;
 	private String[] streamU;
@@ -64,9 +63,6 @@ public class DetailedPlaylistWindow extends ApplicationWindow implements ListSel
 		soundCApi = new SoundCloudApi();
 		deezerApi = new DeezerApi();
 		player = new MusicPlayer();
-		fontLabel = new Font("helvitica", Font.BOLD, 18);
-
-		
 		tracksLength = this.getTrackLength();
 	}
 
@@ -82,11 +78,12 @@ public class DetailedPlaylistWindow extends ApplicationWindow implements ListSel
 		nameList = setNameList();
 		imageMap = createImageMap(nameList);
 		list = new JList(nameList);
-
+		Font font = new Font("helvitica", Font.BOLD, 18);
 		list.setCellRenderer(new tracksListRenderer());
 		list.addListSelectionListener(this);
 		scroll = new JScrollPane(list);
 		JLabel label = new JLabel("Welcome : " + getUserName());
+		label.setFont(font);
 		player.setVisible(false);
 
 		mainPanel.add(label, BorderLayout.NORTH);
@@ -102,7 +99,7 @@ public class DetailedPlaylistWindow extends ApplicationWindow implements ListSel
 	@Override
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
-		newShell.setText(this.title);
+		newShell.setText("Playlist  " + this.title);
 	}
 
 	protected Point getInitialSize() {
@@ -187,12 +184,11 @@ public class DetailedPlaylistWindow extends ApplicationWindow implements ListSel
 
 	private String[] getTracksStream(Object playlist) {
 		if (playlist instanceof Playlist) {
-			return(soundCApi.getStreamUrlPlaylist(playlist));
-		}else{
-			return deezerApi.getStreamUrlPlaylist(playlist) ;
+			return (soundCApi.getStreamUrlPlaylist(playlist));
+		} else {
+			return deezerApi.getStreamUrlPlaylist(playlist);
 		}
-	 
-		 
+
 	}
 
 	private int[] getTrackLength() {

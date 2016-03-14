@@ -23,8 +23,6 @@
     <trimBars xmi:id="_TLAaRegIEeW3qrk7d7G4cw"/>
   </children>
   <handlers xmi:id="_TLAaLegIEeW3qrk7d7G4cw" elementId="MusicStream.handler.quitCommand" contributionURI="bundleclass://MusicStream/musicstream.handlers.QuitHandler" command="_TLAaLOgIEeW3qrk7d7G4cw"/>
-  <handlers xmi:id="_TLAaMegIEeW3qrk7d7G4cw" elementId="MusicStream.handler.openCommand" contributionURI="bundleclass://MusicStream/musicstream.handlers.OpenHandler" command="_TLAaMOgIEeW3qrk7d7G4cw"/>
-  <handlers xmi:id="_TLAaNOgIEeW3qrk7d7G4cw" elementId="MusicStream.handler.saveCommand" contributionURI="bundleclass://MusicStream/musicstream.handlers.SaveHandler" command="_TLAaM-gIEeW3qrk7d7G4cw"/>
   <handlers xmi:id="_TLAaN-gIEeW3qrk7d7G4cw" elementId="MusicStream.handler.aboutCommand" contributionURI="bundleclass://MusicStream/musicstream.handlers.AboutHandler" command="_TLAaNugIEeW3qrk7d7G4cw"/>
   <bindingTables xmi:id="_TLAaLugIEeW3qrk7d7G4cw" bindingContext="_TLAaKegIEeW3qrk7d7G4cw">
     <bindings xmi:id="_TLAaL-gIEeW3qrk7d7G4cw" keySequence="M1+Q" command="_TLAaLOgIEeW3qrk7d7G4cw"/>

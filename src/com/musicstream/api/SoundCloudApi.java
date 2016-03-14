@@ -22,8 +22,7 @@ public class SoundCloudApi implements Api {
 	 * Initializing SoundCould APi
 	 */
 	public SoundCloudApi() {
-		soundcloud = new SoundCloud("481ca2dc5f8ff18044c77239659a5b59",
-				"1067035a0baee3932e79847bae144fa1");
+		soundcloud = new SoundCloud("481ca2dc5f8ff18044c77239659a5b59", "1067035a0baee3932e79847bae144fa1");
 		appU = new AppUtils();
 	}
 
@@ -60,7 +59,7 @@ public class SoundCloudApi implements Api {
 	 */
 	@Override
 	public ArrayList<Track> getTracksByUser() {
-		//String[] c = appU.getUserCredentials();
+		// String[] c = appU.getUserCredentials();
 		this.userAuthentication("", "");
 
 		User me = soundcloud.getMe();
@@ -74,8 +73,7 @@ public class SoundCloudApi implements Api {
 			all_tracks = new ArrayList<Track>();
 
 			for (int i = 0; i < pages; i++) {
-				ArrayList<Track> temp_tracks = soundcloud.getMeFavorites(
-						(i * limit), limit);
+				ArrayList<Track> temp_tracks = soundcloud.getMeFavorites((i * limit), limit);
 				all_tracks.addAll(temp_tracks);
 			}
 
@@ -97,7 +95,7 @@ public class SoundCloudApi implements Api {
 	@Override
 	public ArrayList<Playlist> getPlaylistByUser() {
 
-		//String[] c = appU.getUserCredentials();
+		// String[] c = appU.getUserCredentials();
 		this.userAuthentication("", "");
 		User me = soundcloud.getMe();
 		Integer count = me.getPlaylistCount();
@@ -105,8 +103,7 @@ public class SoundCloudApi implements Api {
 		ArrayList<Playlist> all_playlists = new ArrayList<Playlist>();
 		try {
 			for (int i = 0; i < count; i++) {
-				ArrayList<Playlist> temp_playlists = soundcloud
-						.getMePlaylists();
+				ArrayList<Playlist> temp_playlists = soundcloud.getMePlaylists();
 				all_playlists.addAll(temp_playlists);
 			}
 		} catch (NullPointerException e) {
@@ -141,9 +138,9 @@ public class SoundCloudApi implements Api {
 		}
 		return urls;
 	}
-	 
+
 	public String[] getStreamUrlPlaylist(Object playlist) {
-		
+
 		ArrayList<Track> tracks = getTracksofPlaylist(playlist);
 		String[] urls = new String[tracks.size()];
 		for (int i = 0; i < tracks.size(); i++) {
@@ -151,6 +148,7 @@ public class SoundCloudApi implements Api {
 		}
 		return urls;
 	}
+
 	@Override
 	public String[] getStreamUrlSearch(String title) {
 		ArrayList<Track> tracks = this.getTrack(title);
