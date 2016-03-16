@@ -41,6 +41,14 @@ import de.voidplus.soundcloud.Playlist;
 import de.voidplus.soundcloud.Track;
 import de.voidplus.soundcloud.User;
 
+/**
+ * @author Malek : Class defining the list of Tracks when the user select a playlist
+ * 
+ */
+/**
+ * @author Malek
+ *
+ */
 public class DetailedPlaylistWindow extends ApplicationWindow implements ListSelectionListener {
 	private Object playlist;
 	private Map<String, ImageIcon> imageMap;
@@ -56,6 +64,10 @@ public class DetailedPlaylistWindow extends ApplicationWindow implements ListSel
 	private JScrollPane scroll;
 	private String title = "";
 
+	/**
+	 * @param playlist
+	 * Init ApplicationWindow Object and calling the Api and the music player
+	 */
 	public DetailedPlaylistWindow(Object playlist) {
 		super(null);
 		this.playlist = playlist;
@@ -106,6 +118,10 @@ public class DetailedPlaylistWindow extends ApplicationWindow implements ListSel
 		return new Point(900, 875);
 	}
 
+	/**
+	 * @param list
+	 * @return : a Map that contains the combination of the playlist name and its picture
+	 */
 	private Map<String, ImageIcon> createImageMap(String[] list) {
 		Map<String, ImageIcon> map = new HashMap<>();
 		if (playlist instanceof Playlist) {
@@ -154,6 +170,9 @@ public class DetailedPlaylistWindow extends ApplicationWindow implements ListSel
 		return tracks;
 	}
 
+	/**
+	 * @return Array that contains the names of the playlist's tracks
+	 */
 	private String[] setNameList() {
 		String[] nameListTemp;
 		if (playlist instanceof Playlist) {
@@ -161,7 +180,7 @@ public class DetailedPlaylistWindow extends ApplicationWindow implements ListSel
 			nameListTemp = new String[tracks.size()];
 			for (int i = 0; i < tracks.size(); i++) {
 				nameListTemp[i] = tracks.get(i).getTitle();
-				System.out.println(tracks.get(i).getTitle());
+			//	System.out.println(tracks.get(i).getTitle());
 				tracksSource[i] = "Soundcloud";
 			}
 		} else {
@@ -177,11 +196,18 @@ public class DetailedPlaylistWindow extends ApplicationWindow implements ListSel
 		return nameListTemp;
 	}
 
+	/**
+	 * @return User's Name
+	 */
 	private String getUserName() {
 		User UserData = soundCApi.getUser();
 		return UserData.getUsername();
 	}
 
+	/**
+	 * @param playlist
+	 * @return string containing the stream url of the playlis's Tracks
+	 */
 	private String[] getTracksStream(Object playlist) {
 		if (playlist instanceof Playlist) {
 			return (soundCApi.getStreamUrlPlaylist(playlist));
@@ -197,6 +223,10 @@ public class DetailedPlaylistWindow extends ApplicationWindow implements ListSel
 		return (int[]) ArrayUtils.addAll(sc, deez);
 	}
 
+	/**
+	 * @author Malek JList Renderer
+	 *
+	 */
 	private class tracksListRenderer extends DefaultListCellRenderer {
 
 		Font font = new Font("helvitica", Font.BOLD, 24);

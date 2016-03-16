@@ -33,6 +33,10 @@ import com.musicstream.utils.AppUtils;
 import de.voidplus.soundcloud.Playlist;
 import de.voidplus.soundcloud.User;
 
+/**
+ * @author Malek PLaylist Part Displayls User' PLaylists and Opens a new WIndow
+ *         when a playlist is selected
+ */
 public class PlaylistsPart implements ListSelectionListener {
 	private Map<String, ImageIcon> imageMap;
 	public AppUtils appU;
@@ -43,6 +47,11 @@ public class PlaylistsPart implements ListSelectionListener {
 	Object[] playLists;
 	private Composite parent_C;
 
+	/**
+	 * @param parent
+	 *            : Crating GUI Using JavaSwing Components By creating a frame
+	 *            based on parent composite
+	 */
 	@PostConstruct
 	public void createComposite(Composite parent) {
 		Composite composite = new Composite(parent, SWT.EMBEDDED);
@@ -152,6 +161,9 @@ public class PlaylistsPart implements ListSelectionListener {
 		return nameList;
 	}
 
+	/**
+	 * @return list Playlist
+	 */
 	private Object[] setPlaylists() {
 		ArrayList<Playlist> playlists = getUserPlaylists();
 		ArrayList<com.zeloon.deezer.domain.Playlist> playlistsDeezer = getUserPlaylistsDeezer();

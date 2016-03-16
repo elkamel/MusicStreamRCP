@@ -93,6 +93,9 @@ public class AppUtils {
 
 	}
 
+	/**
+	 * @param url : Plays an audio feed from an url
+	 */
 	public void readAudioFeed(String url) {
 
 		byte[] buffer = new byte[BUFFER_SIZE];
@@ -133,6 +136,10 @@ public class AppUtils {
 		}
 	}
 
+	/**
+	 * @param v
+	 * @return cleaning an list
+	 */
 	public static String[] clean(final String[] v) {
 		List<String> list = new ArrayList<String>(Arrays.asList(v));
 		list.removeAll(Collections.singleton(null));

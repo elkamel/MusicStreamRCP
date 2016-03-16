@@ -11,7 +11,7 @@ import de.voidplus.soundcloud.User;
 
 /**
  * @author Malek
- * 
+ * Javadoc , Look at Api.java
  */
 public class SoundCloudApi implements Api {
 	private SoundCloud soundcloud;
@@ -22,7 +22,7 @@ public class SoundCloudApi implements Api {
 	 * Initializing SoundCould APi
 	 */
 	public SoundCloudApi() {
-		soundcloud = new SoundCloud("481ca2dc5f8ff18044c77239659a5b59", "1067035a0baee3932e79847bae144fa1");
+		soundcloud = new SoundCloud("3ad8a331caba19895d5b2b979d8e1030", "d99e6f9965e8b04d3a97b32a15b56d25");
 		appU = new AppUtils();
 	}
 
@@ -139,6 +139,10 @@ public class SoundCloudApi implements Api {
 		return urls;
 	}
 
+	/**
+	 * @param playlist
+	 * @return Stream Url of the Playlist Tracks
+	 */
 	public String[] getStreamUrlPlaylist(Object playlist) {
 
 		ArrayList<Track> tracks = getTracksofPlaylist(playlist);

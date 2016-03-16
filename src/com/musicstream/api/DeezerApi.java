@@ -14,6 +14,10 @@ import com.zeloon.deezer.domain.internal.search.Search;
 import com.zeloon.deezer.domain.internal.search.SearchOrder;
 import com.zeloon.deezer.io.HttpResourceConnection;
 
+/**
+ * @author Malek
+ * Javadoc , Look at Api.java
+ */
 public class DeezerApi implements Api {
 
 	public DeezerClient deezerClient;
