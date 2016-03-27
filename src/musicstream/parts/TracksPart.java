@@ -37,11 +37,11 @@ import com.musicstream.api.SoundCloudApi;
 import com.musicstream.player.MusicPlayer;
 import com.musicstream.utils.AppUtils;
 import com.zeloon.deezer.domain.internal.TrackId;
-
+ 
 import de.voidplus.soundcloud.Track;
 import de.voidplus.soundcloud.User;
 
-public class TracksPart implements ListSelectionListener {
+public class TracksPart  implements ListSelectionListener {
 	private Map<String, ImageIcon> imageMap;
 	public AppUtils appU;
 	private SoundCloudApi soundCApi;
