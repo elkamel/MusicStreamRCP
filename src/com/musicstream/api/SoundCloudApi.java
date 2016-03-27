@@ -11,7 +11,7 @@ import de.voidplus.soundcloud.User;
 
 /**
  * @author Malek
- * Javadoc , Look at Api.java
+ * 
  */
 public class SoundCloudApi implements Api {
 	private SoundCloud soundcloud;
@@ -22,9 +22,8 @@ public class SoundCloudApi implements Api {
 	 * Initializing SoundCould APi
 	 */
 	public SoundCloudApi() {
-	//	soundcloud = new SoundCloud("3ad8a331caba19895d5b2b979d8e1030", "d99e6f9965e8b04d3a97b32a15b56d25");
 		soundcloud = new SoundCloud("481ca2dc5f8ff18044c77239659a5b59",
-				"1067035a0baee3932e79847bae144fa1");
+				"1067035a0baee3932e79847bae144fa1","testing.kamel@gmail.com","azerty123");
 		appU = new AppUtils();
 	}
 
@@ -61,8 +60,8 @@ public class SoundCloudApi implements Api {
 	 */
 	@Override
 	public ArrayList<Track> getTracksByUser() {
-		// String[] c = appU.getUserCredentials();
-		soundcloud.login("testing.kamel@gmail.com", "azerty123");
+	//	String[] c = appU.getUserCredentials();
+	//	this.userAuthentication(c[0], c[1]);
 
 		User me = soundcloud.getMe();
 
@@ -75,7 +74,8 @@ public class SoundCloudApi implements Api {
 			all_tracks = new ArrayList<Track>();
 
 			for (int i = 0; i < pages; i++) {
-				ArrayList<Track> temp_tracks = soundcloud.getMeFavorites((i * limit), limit);
+				ArrayList<Track> temp_tracks = soundcloud.getMeFavorites(
+						(i * limit), limit);
 				all_tracks.addAll(temp_tracks);
 			}
 
@@ -97,15 +97,16 @@ public class SoundCloudApi implements Api {
 	@Override
 	public ArrayList<Playlist> getPlaylistByUser() {
 
-		// String[] c = appU.getUserCredentials();
-		this.userAuthentication("", "");
+		//String[] c = appU.getUserCredentials();
+	//	this.userAuthentication(c[0], c[1]);
 		User me = soundcloud.getMe();
 		Integer count = me.getPlaylistCount();
 
 		ArrayList<Playlist> all_playlists = new ArrayList<Playlist>();
 		try {
 			for (int i = 0; i < count; i++) {
-				ArrayList<Playlist> temp_playlists = soundcloud.getMePlaylists();
+				ArrayList<Playlist> temp_playlists = soundcloud
+						.getMePlaylists();
 				all_playlists.addAll(temp_playlists);
 			}
 		} catch (NullPointerException e) {
@@ -123,7 +124,6 @@ public class SoundCloudApi implements Api {
 
 	@Override
 	public ArrayList<Track> getTracksofPlaylist(Object playlist) {
-		soundcloud.login("testing.kamel@gmail.com", "azerty123");
 		return ((Playlist) playlist).getTracks();
 	}
 
@@ -134,22 +134,7 @@ public class SoundCloudApi implements Api {
 
 	@Override
 	public String[] getStreamUrl() {
-	
 		ArrayList<Track> tracks = this.getTracksByUser();
-		String[] urls = new String[tracks.size()];
-		for (int i = 0; i < tracks.size(); i++) {
-			urls[i] = tracks.get(i).getStreamUrl();
-		}
-		return urls;
-	}
-
-	/**
-	 * @param playlist
-	 * @return Stream Url of the Playlist Tracks
-	 */
-	public String[] getStreamUrlPlaylist(Object playlist) {
-
-		ArrayList<Track> tracks = getTracksofPlaylist(playlist);
 		String[] urls = new String[tracks.size()];
 		for (int i = 0; i < tracks.size(); i++) {
 			urls[i] = tracks.get(i).getStreamUrl();
@@ -159,7 +144,6 @@ public class SoundCloudApi implements Api {
 
 	@Override
 	public String[] getStreamUrlSearch(String title) {
-		soundcloud.login("testing.kamel@gmail.com", "azerty123");
 		ArrayList<Track> tracks = this.getTrack(title);
 		String[] urls = new String[tracks.size()];
 		for (int i = 0; i < tracks.size(); i++) {
@@ -170,7 +154,6 @@ public class SoundCloudApi implements Api {
 
 	@Override
 	public int[] getLength() {
-		soundcloud.login("testing.kamel@gmail.com", "azerty123");
 		ArrayList<Track> tracks = this.getTracksByUser();
 		int[] length = new int[tracks.size()];
 		for (int i = 0; i < tracks.size(); i++) {
@@ -187,5 +170,17 @@ public class SoundCloudApi implements Api {
 			length[i] = tracks.get(i).getDuration();
 		}
 		return length;
+	}
+	/**
+	 * @param playlist
+	 * @return Stream Url of the Playlist Tracks
+	 */
+	public String[] getStreamUrlPlaylist(Object playlist) {
+		ArrayList<Track> tracks = getTracksofPlaylist(playlist);
+		String[] urls = new String[tracks.size()];
+		for (int i = 0; i < tracks.size(); i++) {
+			urls[i] = tracks.get(i).getStreamUrl();
+		}
+		return urls;
 	}
 }
