@@ -5,7 +5,9 @@
       <children xsi:type="advanced:Perspective" xmi:id="_TLAaQegIEeW3qrk7d7G4cw">
         <children xsi:type="basic:PartSashContainer" xmi:id="_TLAaQugIEeW3qrk7d7G4cw">
           <children xsi:type="basic:PartStack" xmi:id="_TLAaQ-gIEeW3qrk7d7G4cw">
-            <children xsi:type="basic:Part" xmi:id="_y-bRkOiOEeWQPI6S2_eJsA" elementId="" contributionURI="bundleclass://MusicStream/musicstream.parts.TracksPart" label="Tracks" iconURI="platform:/plugin/MusicStream/icons/tracks.png"/>
+            <children xsi:type="basic:Part" xmi:id="_y-bRkOiOEeWQPI6S2_eJsA" elementId="com.part.globalTracks" contributionURI="bundleclass://MusicStream/musicstream.parts.TracksPart" label="Tracks" iconURI="platform:/plugin/MusicStream/icons/tracks.png"/>
+            <children xsi:type="basic:Part" xmi:id="_q1HYEPPGEeW_UaR9a4X5qQ" elementId="musicstream.part.tracksDeezer" visible="false" contributionURI="bundleclass://MusicStream/musicstream.parts.DeezerPart" label="Tracks" iconURI="platform:/plugin/MusicStream/icons/tracks.png"/>
+            <children xsi:type="basic:Part" xmi:id="_j_IUgPPCEeW_UaR9a4X5qQ" elementId="musicstream.part.tracksSc" visible="false" contributionURI="bundleclass://MusicStream/musicstream.parts.SoundCloudPart" label="Tracks" iconURI="platform:/plugin/MusicStream/icons/tracks.png" tooltip="SoundClound"/>
             <children xsi:type="basic:Part" xmi:id="_ILA8YOiVEeWQPI6S2_eJsA" elementId="musicstream.part.playlists" contributionURI="bundleclass://MusicStream/musicstream.parts.PlaylistsPart" label="Playlists" iconURI="platform:/plugin/MusicStream/icons/playlist.png"/>
             <children xsi:type="basic:Part" xmi:id="_WuzV8OiVEeWQPI6S2_eJsA" elementId="musicstream.part.search" contributionURI="bundleclass://MusicStream/musicstream.parts.SearchPart" label="Search" iconURI="platform:/plugin/MusicStream/icons/search.png"/>
           </children>
@@ -19,11 +21,15 @@
       <children xsi:type="menu:Menu" xmi:id="_TLAaPugIEeW3qrk7d7G4cw" label="Help">
         <children xsi:type="menu:HandledMenuItem" xmi:id="_TLAaP-gIEeW3qrk7d7G4cw" label="About" command="_TLAaNugIEeW3qrk7d7G4cw"/>
       </children>
+      <children xsi:type="menu:Menu" xmi:id="_eDjY0PPAEeW_UaR9a4X5qQ" elementId="musicstream.menu.services" label="Services">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_gJd8cPPAEeW_UaR9a4X5qQ" elementId="musicstream.handledmenuitem.selectservice" label="Select Service" iconURI="platform:/plugin/MusicStream/icons/item.png" command="_k9fFEPPAEeW_UaR9a4X5qQ"/>
+      </children>
     </mainMenu>
     <trimBars xmi:id="_TLAaRegIEeW3qrk7d7G4cw"/>
   </children>
   <handlers xmi:id="_TLAaLegIEeW3qrk7d7G4cw" elementId="MusicStream.handler.quitCommand" contributionURI="bundleclass://MusicStream/musicstream.handlers.QuitHandler" command="_TLAaLOgIEeW3qrk7d7G4cw"/>
   <handlers xmi:id="_TLAaN-gIEeW3qrk7d7G4cw" elementId="MusicStream.handler.aboutCommand" contributionURI="bundleclass://MusicStream/musicstream.handlers.AboutHandler" command="_TLAaNugIEeW3qrk7d7G4cw"/>
+  <handlers xmi:id="_28JDAPPAEeW_UaR9a4X5qQ" elementId="musicstream.handler.0" contributionURI="bundleclass://MusicStream/musicstream.handlers.ServicesHandler" command="_k9fFEPPAEeW_UaR9a4X5qQ"/>
   <bindingTables xmi:id="_TLAaLugIEeW3qrk7d7G4cw" bindingContext="_TLAaKegIEeW3qrk7d7G4cw">
     <bindings xmi:id="_TLAaL-gIEeW3qrk7d7G4cw" keySequence="M1+Q" command="_TLAaLOgIEeW3qrk7d7G4cw"/>
     <bindings xmi:id="_TLAaMugIEeW3qrk7d7G4cw" keySequence="M1+O" command="_TLAaMOgIEeW3qrk7d7G4cw"/>
@@ -38,6 +44,7 @@
   <commands xmi:id="_TLAaMOgIEeW3qrk7d7G4cw" elementId="MusicStream.open" commandName="openCommand"/>
   <commands xmi:id="_TLAaM-gIEeW3qrk7d7G4cw" elementId="org.eclipse.ui.file.save" commandName="saveCommand"/>
   <commands xmi:id="_TLAaNugIEeW3qrk7d7G4cw" elementId="org.eclipse.ui.help.aboutAction" commandName="aboutCommand"/>
+  <commands xmi:id="_k9fFEPPAEeW_UaR9a4X5qQ" elementId="musicstream.command.selectservice" commandName="selectService"/>
   <addons xmi:id="_TLAaIugIEeW3qrk7d7G4cw" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_TLAaI-gIEeW3qrk7d7G4cw" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_TLAaJOgIEeW3qrk7d7G4cw" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
