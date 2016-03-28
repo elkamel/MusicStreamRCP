@@ -43,10 +43,13 @@ public class AudioPlayer implements LineListener {
 	 * @throws UnsupportedAudioFileException
 	 * @throws LineUnavailableException
 	 */
-	public void load(String audioFilePath) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+	public void load(String audioFilePath)
+			throws UnsupportedAudioFileException, IOException,
+			LineUnavailableException {
 		File audioFile = new File(audioFilePath);
 
-		AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+		AudioInputStream audioStream = AudioSystem
+				.getAudioInputStream(audioFile);
 
 		AudioFormat format = audioStream.getFormat();
 
@@ -96,6 +99,13 @@ public class AudioPlayer implements LineListener {
 		length += String.format("%02d", second);
 
 		return length;
+	}
+
+	public int getLength(int seconds, String source) {
+		if (source.equals("Soundcloud")) {
+			return (int) TimeUnit.MILLISECONDS.toSeconds(seconds);
+		} else
+			return seconds;
 	}
 
 	/**
