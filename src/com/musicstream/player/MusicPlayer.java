@@ -46,7 +46,7 @@ public class MusicPlayer extends JPanel implements ActionListener {
 	private JSlider sliderTime = new JSlider();
 
 	ActionListener tache_timer;
-	private static int heure = 0, minute = 0, seconde = 0;
+	private static int seconde = 0;
 	final Timer chrono;
 	private int actualSeconds = 0;
 
@@ -130,7 +130,7 @@ public class MusicPlayer extends JPanel implements ActionListener {
 		timer = new PlayingTimer(labelTimeCounter, sliderTime);
 		tache_timer = new ActionListener() {
 			public void actionPerformed(ActionEvent e1) {
-				if(!isPause){
+				if (!isPause) {
 					seconde++;
 				}
 				actualSeconds = seconde;
@@ -197,7 +197,7 @@ public class MusicPlayer extends JPanel implements ActionListener {
 						resetControls();
 					}
 
-				} catch (IOException ex) {
+				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(MusicPlayer.this,
 							"I/O error while playing the audio file!", "Error",
 							JOptionPane.ERROR_MESSAGE);
@@ -217,6 +217,8 @@ public class MusicPlayer extends JPanel implements ActionListener {
 		buttonPause.setText("Pause");
 		buttonPause.setEnabled(false);
 		chrono.stop();
+		seconde = 0;
+		actualSeconds = 0;
 		timer.reset();
 		timer.interrupt();
 		player.stop();
