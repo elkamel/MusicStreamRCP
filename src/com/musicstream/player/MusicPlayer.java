@@ -130,19 +130,11 @@ public class MusicPlayer extends JPanel implements ActionListener {
 		timer = new PlayingTimer(labelTimeCounter, sliderTime);
 		tache_timer = new ActionListener() {
 			public void actionPerformed(ActionEvent e1) {
-				if (!isPause) {
+				if(!isPause){
 					seconde++;
 				}
 				actualSeconds = seconde;
 				timer.setActualSeconds(actualSeconds);
-				if (seconde == 60) {
-					seconde = 0;
-					minute++;
-				}
-				if (minute == 60) {
-					minute = 0;
-					heure++;
-				}
 			}
 		};
 		chrono = new Timer(1000, tache_timer);
