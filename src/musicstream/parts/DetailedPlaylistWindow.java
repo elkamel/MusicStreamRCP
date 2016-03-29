@@ -66,7 +66,8 @@ public class DetailedPlaylistWindow extends ApplicationWindow implements ListSel
 
 	/**
 	 * @param playlist
-	 * Init ApplicationWindow Object and calling the Api and the music player
+	 *            Init ApplicationWindow Object and calling the Api and the
+	 *            music player
 	 */
 	public DetailedPlaylistWindow(Object playlist) {
 		super(null);
@@ -120,7 +121,8 @@ public class DetailedPlaylistWindow extends ApplicationWindow implements ListSel
 
 	/**
 	 * @param list
-	 * @return : a Map that contains the combination of the playlist name and its picture
+	 * @return : a Map that contains the combination of the playlist name and
+	 *         its picture
 	 */
 	private Map<String, ImageIcon> createImageMap(String[] list) {
 		Map<String, ImageIcon> map = new HashMap<>();
@@ -180,7 +182,7 @@ public class DetailedPlaylistWindow extends ApplicationWindow implements ListSel
 			nameListTemp = new String[tracks.size()];
 			for (int i = 0; i < tracks.size(); i++) {
 				nameListTemp[i] = tracks.get(i).getTitle();
-			//	System.out.println(tracks.get(i).getTitle());
+				// System.out.println(tracks.get(i).getTitle());
 				tracksSource[i] = "Soundcloud";
 			}
 		} else {
