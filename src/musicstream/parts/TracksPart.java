@@ -32,16 +32,17 @@ import org.eclipse.swt.awt.SWT_AWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.List;
 
+import com.musicstream.api.Api;
 import com.musicstream.api.DeezerApi;
 import com.musicstream.api.SoundCloudApi;
 import com.musicstream.player.MusicPlayer;
 import com.musicstream.utils.AppUtils;
 import com.zeloon.deezer.domain.internal.TrackId;
- 
+
 import de.voidplus.soundcloud.Track;
 import de.voidplus.soundcloud.User;
 
-public class TracksPart  implements ListSelectionListener {
+public class TracksPart implements ListSelectionListener {
 	private Map<String, ImageIcon> imageMap;
 	public AppUtils appU;
 	private SoundCloudApi soundCApi;
@@ -159,12 +160,13 @@ public class TracksPart  implements ListSelectionListener {
 	 */
 	private ArrayList<Track> getUserTracks() {
 
-		ArrayList<Track> tracks = soundCApi.getTracksByUser();
+		ArrayList<Track> tracks = (ArrayList<Track>) soundCApi.getTracksByUser();
 		return tracks;
 	}
 
 	private ArrayList<com.zeloon.deezer.domain.Track> getUserTracksDeezer() {
-		ArrayList<com.zeloon.deezer.domain.Track> tracks = deezerApi.getTracksByUser();
+		ArrayList<com.zeloon.deezer.domain.Track> tracks = (ArrayList<com.zeloon.deezer.domain.Track>) deezerApi
+				.getTracksByUser();
 		return tracks;
 	}
 
@@ -192,7 +194,7 @@ public class TracksPart  implements ListSelectionListener {
 	 * @return User's User name to be displayed
 	 */
 	private String getUserName() {
-		User UserData = soundCApi.getUser();
+		User UserData = (User) soundCApi.getUser();
 		return UserData.getUsername();
 	}
 

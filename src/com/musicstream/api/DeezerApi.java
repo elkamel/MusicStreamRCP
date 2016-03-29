@@ -1,5 +1,7 @@
 package com.musicstream.api;
 
+ 
+import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 
 import com.musicstream.utils.AppUtils;
@@ -18,14 +20,14 @@ import com.zeloon.deezer.io.HttpResourceConnection;
  * @author Malek
  * Javadoc , Look at Api.java
  */
-public class DeezerApi implements Api {
+public class DeezerApi  extends Api {
 
 	public DeezerClient deezerClient;
 	UserId uID;
 	AppUtils app;
 	public Boolean connectedDeezer = false;
-
-	public DeezerApi() {
+	 
+	   public DeezerApi() {
 		deezerClient = new DeezerClient(new HttpResourceConnection());
 		uID = new UserId(905831863L);
 		app = new AppUtils();
@@ -33,6 +35,7 @@ public class DeezerApi implements Api {
 
 	@Override
 	public Boolean userAuthentication(String login, String pass) {
+		 
 		if (login.equals("testing.kamel@gmail.com") && pass.equals("azerty123"))
 			return true;
 		else

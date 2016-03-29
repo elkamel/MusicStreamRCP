@@ -3,6 +3,7 @@ package com.musicstream.api;
 import java.util.ArrayList;
 
 import com.musicstream.utils.AppUtils;
+import com.zeloon.deezer.domain.internal.TrackId;
 
 import de.voidplus.soundcloud.Playlist;
 import de.voidplus.soundcloud.SoundCloud;
@@ -13,7 +14,7 @@ import de.voidplus.soundcloud.User;
  * @author Malek
  * 
  */
-public class SoundCloudApi implements Api {
+public class SoundCloudApi extends Api {
 	private SoundCloud soundcloud;
 	// private User me;
 	AppUtils appU;
@@ -182,5 +183,11 @@ public class SoundCloudApi implements Api {
 			urls[i] = tracks.get(i).getStreamUrl();
 		}
 		return urls;
+	}
+
+	@Override
+	public String getPreviewTrack(TrackId tID) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

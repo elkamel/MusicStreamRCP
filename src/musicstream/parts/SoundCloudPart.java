@@ -30,6 +30,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.awt.SWT_AWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.List;
+
  
 import com.musicstream.api.SoundCloudApi;
 import com.musicstream.player.MusicPlayer;
@@ -129,7 +130,7 @@ public class SoundCloudPart  implements ListSelectionListener {
 	 */
 	private ArrayList<Track> getUserTracks() {
 
-		ArrayList<Track> tracks = soundCApi.getTracksByUser();
+		ArrayList<Track> tracks = (ArrayList<Track>) soundCApi.getTracksByUser();
 		return tracks;
 	}
 
@@ -155,7 +156,7 @@ public class SoundCloudPart  implements ListSelectionListener {
 	 * @return User's User name to be displayed
 	 */
 	private String getUserName() {
-		User UserData = soundCApi.getUser();
+		User UserData = (User) soundCApi.getUser();
 		return UserData.getUsername();
 	}
 

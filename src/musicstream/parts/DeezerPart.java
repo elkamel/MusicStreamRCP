@@ -1,4 +1,5 @@
 package musicstream.parts;
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -22,23 +23,21 @@ import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import org.apache.commons.lang.ArrayUtils;
-import org.eclipse.e4.ui.di.Focus;
-import org.eclipse.e4.ui.di.Persist;
 import org.eclipse.e4.ui.model.application.ui.MDirtyable;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.awt.SWT_AWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.List;
 
+import com.musicstream.api.Api;
 import com.musicstream.api.DeezerApi;
 import com.musicstream.api.SoundCloudApi;
 import com.musicstream.player.MusicPlayer;
 import com.musicstream.utils.AppUtils;
 import com.zeloon.deezer.domain.internal.TrackId;
 
-import de.voidplus.soundcloud.Track;
 import de.voidplus.soundcloud.User;
+
 public class DeezerPart implements ListSelectionListener {
 	private Map<String, ImageIcon> imageMap;
 	public AppUtils appU;
@@ -54,6 +53,10 @@ public class DeezerPart implements ListSelectionListener {
 	@Inject
 	private MDirtyable dirty;
 
+	/**
+	 * @param parent
+	 *            Part contains only the tracks from Deezer
+	 */
 	@PostConstruct
 	public void createComposite(Composite parent) {
 
@@ -132,8 +135,10 @@ public class DeezerPart implements ListSelectionListener {
 		}
 		return map;
 	}
+
 	private ArrayList<com.zeloon.deezer.domain.Track> getUserTracksDeezer() {
-		ArrayList<com.zeloon.deezer.domain.Track> tracks = deezerApi.getTracksByUser();
+		ArrayList<com.zeloon.deezer.domain.Track> tracks = (ArrayList<com.zeloon.deezer.domain.Track>) deezerApi
+				.getTracksByUser();
 		return tracks;
 	}
 
@@ -143,10 +148,9 @@ public class DeezerPart implements ListSelectionListener {
 	 */
 	private String[] setNameList() {
 
-		 
 		ArrayList<com.zeloon.deezer.domain.Track> tracksDeezer = getUserTracksDeezer();
 		String[] nameList = new String[tracksDeezer.size()];
-		 
+
 		for (int i = 0; i < tracksDeezer.size(); i++) {
 			nameList[i] = tracksDeezer.get(i).getTitle();
 			tracksSource[i] = "Deezer";
@@ -158,20 +162,20 @@ public class DeezerPart implements ListSelectionListener {
 	 * @return User's User name to be displayed
 	 */
 	private String getUserName() {
-	 
-		return soundCApi.getUser().getUsername();
+
+		return ((User) soundCApi.getUser()).getUsername();
 	}
 
 	/**
 	 * @return Array contains the stream URL of each Track from the two Services
 	 */
 	private String[] getTracksStream() {
-		 return deezerApi.getStreamUrl();
-	 }
+		return deezerApi.getStreamUrl();
+	}
 
 	private int[] getTrackLength() {
-		 return deezerApi.getLength();
-	 }
+		return deezerApi.getLength();
+	}
 
 	@Override
 	public void valueChanged(ListSelectionEvent arg0) {

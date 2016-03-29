@@ -26,6 +26,7 @@ import org.eclipse.swt.awt.SWT_AWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 
+import com.musicstream.api.Api;
 import com.musicstream.api.DeezerApi;
 import com.musicstream.api.SoundCloudApi;
 import com.musicstream.utils.AppUtils;
@@ -134,12 +135,12 @@ public class PlaylistsPart implements ListSelectionListener {
 	 */
 	private ArrayList<Playlist> getUserPlaylists() {
 
-		ArrayList<Playlist> playlists = soundCApi.getPlaylistByUser();
+		ArrayList<Playlist> playlists = (ArrayList<Playlist>) soundCApi.getPlaylistByUser();
 		return playlists;
 	}
 
 	private ArrayList<com.zeloon.deezer.domain.Playlist> getUserPlaylistsDeezer() {
-		ArrayList<com.zeloon.deezer.domain.Playlist> playlistsDeezer = deezerApi.getPlaylistByUser();
+		ArrayList<com.zeloon.deezer.domain.Playlist> playlistsDeezer = (ArrayList<com.zeloon.deezer.domain.Playlist>) deezerApi.getPlaylistByUser();
 		return playlistsDeezer;
 	}
 
@@ -181,7 +182,7 @@ public class PlaylistsPart implements ListSelectionListener {
 	 * @return User's User name to be displayed
 	 */
 	private String getUserName() {
-		User UserData = soundCApi.getUser();
+		User UserData = (User) soundCApi.getUser();
 		return UserData.getUsername();
 	}
 

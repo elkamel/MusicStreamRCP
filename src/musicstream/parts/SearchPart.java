@@ -39,6 +39,7 @@ import org.eclipse.swt.awt.SWT_AWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
+import com.musicstream.api.Api;
 import com.musicstream.api.DeezerApi;
 import com.musicstream.api.SoundCloudApi;
 import com.musicstream.player.MusicPlayer;
@@ -50,12 +51,12 @@ public class SearchPart implements ListSelectionListener, ActionListener {
 	public static JTextField textField;
 	private Map<String, ImageIcon> imageMap;
 	public AppUtils appU;
+	private SoundCloudApi soundCApi;
 	private DeezerApi deezerApi;
 	private Font fontLabel;
 	private String[] nameList;
 	private JList list;
 	private JScrollPane scroll = null;
-	private SoundCloudApi soundCApi;
 	private String[] streamU;
 	private int[] tracksLength;
 	private MusicPlayer player;
@@ -206,13 +207,13 @@ public class SearchPart implements ListSelectionListener, ActionListener {
 	public ArrayList<Track> getSearchResult(String title) {
 
 		ArrayList<Track> tracks = new ArrayList<Track>();
-		tracks = soundCApi.getTrack(title);
+		tracks = (ArrayList<Track>) soundCApi.getTrack(title);
 		return tracks;
 	}
 
 	public ArrayList<com.zeloon.deezer.domain.Track> getSearchResultDeezer(String title) {
 		ArrayList<com.zeloon.deezer.domain.Track> tracks = new ArrayList<com.zeloon.deezer.domain.Track>();
-		tracks = deezerApi.getTrack(title);
+		tracks = (ArrayList<com.zeloon.deezer.domain.Track>) deezerApi.getTrack(title);
 		return tracks;
 	}
 
